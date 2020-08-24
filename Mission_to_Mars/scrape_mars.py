@@ -19,7 +19,8 @@ class scrape():
         self.mars_news_list = []
         for l in list_soup_mars_news:
             try:
-                self.mars_news_list.append({'title':l.find('div', class_='content_title').text.strip(), 'content':l.find('div', class_='rollover_description_inner').text.strip()})
+                self.mars_news_list.append({'title':l.find('div', class_='content_title').text.strip(),\
+                                             'content':l.find('div', class_='rollover_description_inner').text.strip()})
             except:
                 pass
 

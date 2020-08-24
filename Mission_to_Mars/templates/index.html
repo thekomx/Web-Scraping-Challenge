@@ -14,9 +14,12 @@
     <body>
         <h1>Hello</h1>
         <head>
-            {% for pic in pix %}
-            <h3>1 {{pic.thumb}}</h3>
-            <img src="{{pic.thumb}}" alt="">
+            {% for mars_pic in mars_pics %}
+            <img src="{{mars_pic.thumb}}" alt="">
+            {% endfor %}
+
+            {% for mars_fact in mars_facts %}
+              <span>{{ mars_fact.fact_html_table }}</span>
             {% endfor %}
         </head>
         <main>
