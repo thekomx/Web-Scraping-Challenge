@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="author" content="TheKOM">
+        <meta name="description" content="Mission to Mars">
+        <meta name="keywords" content="Mars,Mission to Mars,space,Mars facts,Hemisphere, Mars news">
+        <link rel="shortcut icon" href="../res/mars.ico" type="image/vnd.microsoft.icon">
+        <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
+        <title>Mission to Mars</title>
+    </head>
+    <body>
+        <h1>Hello</h1>
+        <head>
+            {% for pic in pix %}
+            <h3>1 {{pic.thumb}}</h3>
+            <img src="{{pic.thumb}}" alt="">
+            {% endfor %}
+        </head>
+        <main>
+            
+        </main>
+        <footer>
+            
+        </footer>
+        <h1>Bye</h1>
+    </body>
+</html>

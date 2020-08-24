@@ -10,6 +10,7 @@ class scrape():
     mars_facts = 'https://space-facts.com/mars/'
     mars_hemisp = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
 
+    mars_pics_web = 'https://www.jpl.nasa.gov'
 
     def __init__(self):
 
@@ -30,8 +31,8 @@ class scrape():
             try:
                 release_date = {'release_date':l.find(class_='release_date').text}
                 item_tease_overlay = {'item_tease_overlay':l.find(class_='item_tease_overlay').text}
-                thumb = {'thumb':l.find(class_='thumb')['src']}
-                large = {'large':l.a['data-fancybox-href']}
+                thumb = {'thumb':self.mars_pics_web + l.find(class_='thumb')['src']}
+                large = {'large':self.mars_pics_web + l.a['data-fancybox-href']}
                 self.mars_pics_list.append(dict(release_date, **item_tease_overlay, **thumb, **large))
             except:
                 pass
@@ -47,6 +48,3 @@ class scrape():
                                 {"title":"Cerberus Hemisphere", "img_url":"https://astropedia.astrogeology.usgs.gov/download/Mars/Viking/cerberus_enhanced.tif/full.jpg"},\
                                 {"title":"Schiaparelli Hemisphere", "img_url":"https://astropedia.astrogeology.usgs.gov/download/Mars/Viking/schiaparelli_enhanced.tif/full.jpg"},\
                                 {"title":"Syrtis Major Hemisphere", "img_url":"https://astropedia.astrogeology.usgs.gov/download/Mars/Viking/syrtis_major_enhanced.tif/full.jpg"}]
-
-
-
