@@ -14,12 +14,22 @@
     <body>
         <h1>Hello</h1>
         <head>
+            {% for mars_new in mars_news %}
+            <h3>{{mars_new.title}}</h3>
+            <h4>{{mars_new.content}}</h4>
+            {% endfor %}
+
             {% for mars_pic in mars_pics %}
             <img src="{{mars_pic.thumb}}" alt="">
             {% endfor %}
 
             {% for mars_fact in mars_facts %}
-              <span>{{ mars_fact.fact_html_table }}</span>
+              <span>{{ mars_fact.fact_html_table|safe }}</span>
+            {% endfor %}
+
+            {% for mars_hemis in mars_hemisp %}
+            <h3>{{ mars_hemis.title }}</h3>
+            <img src="{{mars_hemis.img_url}}" alt="">
             {% endfor %}
         </head>
         <main>

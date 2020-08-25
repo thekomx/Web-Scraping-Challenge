@@ -5,6 +5,7 @@ import pymongo
     
 mongo_db = pymongo.MongoClient('mongodb://localhost:27017').Mission_to_Mars_DB
 
+
 app = Flask(__name__)
 
 @app.route('/scrape')
@@ -22,10 +23,12 @@ def scrape():
 @app.route('/')
 def index():
 
+    mars_news = list(mongo_db.Mars_News.find())
     mars_pics = list(mongo_db.Mars_Pics.find())
     mars_facts = list(mongo_db.Mars_Facts.find())
+    mars_hemisp = list(mongo_db.Mars_Hemisphere.find())
 
-    return render_template('index.html', mars_pics=mars_pics, mars_facts=mars_facts)
+    return render_template('index.html', mars_news=mars_news, mars_pics=mars_pics, mars_facts=mars_facts, mars_hemisp=mars_hemisp)
 
 
 if __name__ == "__main__":
