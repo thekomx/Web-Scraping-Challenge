@@ -12,6 +12,9 @@ app = Flask(__name__)
 def scrape():
     scraper = sc()
 
+    for c in mongo_db.list_collection_names():
+        mongo_db[c].drop()
+
     mongo_db.Mars_News.insert_many(scraper.mars_news_list)
     mongo_db.Mars_Pics.insert_many(scraper.mars_pics_list)
     mongo_db.Mars_Facts.insert_many(scraper.mars_facts_list)
@@ -28,7 +31,7 @@ def index():
     mars_facts = list(mongo_db.Mars_Facts.find())
     mars_hemisp = list(mongo_db.Mars_Hemisphere.find())
 
-    return render_template('index.html', mars_news=mars_news, mars_pics=mars_pics, mars_facts=mars_facts, mars_hemisp=mars_hemisp)
+    return render_template('index.html', mars_news=mars_news, mars_pics=mars_pics, mars_facts=mars_facts[1], mars_hemisp=mars_hemisp)
 
 
 if __name__ == "__main__":

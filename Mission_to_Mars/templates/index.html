@@ -8,12 +8,36 @@
         <meta name="description" content="Mission to Mars">
         <meta name="keywords" content="Mars,Mission to Mars,space,Mars facts,Hemisphere, Mars news">
         <link rel="shortcut icon" href="../res/mars.ico" type="image/vnd.microsoft.icon">
-        <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
+        <link rel="stylesheet" href="../css/style.css" type="text/css">
+        <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
         <title>Mission to Mars</title>
+
+        <style>
+
+        </style>
+
+
     </head>
     <body>
-        <h1>Hello</h1>
+        <div class="container">
+            <div class="mars_news">
+                <div class="news">
+                    <h1>Header</h1>
+                    <p><b>Lorem ipsum dolor sit amet consectetur adipisicing.</b></p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, inventore. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
+                </div>
+            </div>
+            <div class="mars_pics"></div>
+            <div class="mars_facts"></div>
+            <div class="mars_hemisp"></div>
+
+
+
+
+
+
         <head>
+
             {% for mars_new in mars_news %}
             <h3>{{mars_new.title}}</h3>
             <h4>{{mars_new.content}}</h4>
@@ -23,9 +47,7 @@
             <img src="{{mars_pic.thumb}}" alt="">
             {% endfor %}
 
-            {% for mars_fact in mars_facts %}
-              <span>{{ mars_fact.fact_html_table|safe }}</span>
-            {% endfor %}
+            {{ mars_facts.fact_html_table|safe }}
 
             {% for mars_hemis in mars_hemisp %}
             <h3>{{ mars_hemis.title }}</h3>
@@ -38,6 +60,6 @@
         <footer>
             
         </footer>
-        <h1>Bye</h1>
+        </div>
     </body>
 </html>
