@@ -42,6 +42,8 @@ class scrape():
 
         list_soup_mars_pics = soup_mars_pics.find_all('ul', class_='articles')[0].find_all('li', class_='slide')
         mars_pics_web = 'https://www.jpl.nasa.gov'
+        lenn = len(list_soup_mars_pics)
+        cur = 0
         self.mars_pics_list=[]
         for l in list_soup_mars_pics:
             try:
@@ -50,7 +52,20 @@ class scrape():
                 thumb = {'thumb':mars_pics_web+l.find(class_='thumb')['src']}
                 large = {'large':mars_pics_web+l.a['data-fancybox-href']}
 
-                self.mars_pics_list.append(dict(release_date, **item_tease_overlay, **thumb, **large))
+                cur+=1
+                if cur == lenn:
+                    nxt = 1
+                    prv = cur - 1
+                else:
+                    nxt = cur + 1
+                    if cur == 1:
+                        prv = lenn
+                    else:
+                        prv = cur - 1
+                
+                page_indic = {'cur':cur, 'prv':prv, 'nxt':nxt}
+
+                self.mars_pics_list.append(dict(release_date, **item_tease_overlay, **thumb, **large, **page_indic))
             except:
                 pass
     #---------------------------------
@@ -61,7 +76,11 @@ class scrape():
 
         self.mars_facts_list = []
         for l in list_mars_facts:
-            self.mars_facts_list.append({'fact_html_table' : l.to_html(index=False)})
+            fact_html_table = l.to_html(index=False)
+            fact_html_table = fact_html_table.replace('style=', 'x=')
+            fact_html_table = fact_html_table.replace('<th>0</th>', '<th>Description</th>')
+            fact_html_table = fact_html_table.replace('<th>1</th>', '<th>Mars</th>')
+            self.mars_facts_list.append({'fact_html_table' : fact_html_table})
     #---------------------------------
 
 

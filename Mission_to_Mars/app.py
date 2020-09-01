@@ -1,5 +1,6 @@
 from scrape_mars import scrape as sc
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
+from datetime import datetime
 import pymongo
 
     
@@ -19,8 +20,9 @@ def scrape():
     mongo_db.Mars_Pics.insert_many(scraper.mars_pics_list)
     mongo_db.Mars_Facts.insert_many(scraper.mars_facts_list)
     mongo_db.Mars_Hemisphere.insert_many(scraper.mars_hemisp_list)
+    mongo_db.Scrape_Date.insert_one({'scrape_date':datetime.now().strftime('%A %d %B %Y - %X')})
 
-    return 'Successfully Scrapped.'
+    return redirect('/')
 
 
 @app.route('/')
@@ -30,8 +32,9 @@ def index():
     mars_pics = list(mongo_db.Mars_Pics.find())
     mars_facts = list(mongo_db.Mars_Facts.find())
     mars_hemisp = list(mongo_db.Mars_Hemisphere.find())
+    scrape_date = list(mongo_db.Scrape_Date.find())
 
-    return render_template('index.html', mars_news=mars_news, mars_pics=mars_pics, mars_facts=mars_facts[1], mars_hemisp=mars_hemisp)
+    return render_template('index.html', mars_news=mars_news[0], mars_pics=mars_pics, mars_facts=mars_facts[0], mars_hemisp=mars_hemisp, scrape_date=scrape_date[0])
 
 
 if __name__ == "__main__":
